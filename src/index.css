@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 4%;
+    --foreground: 40 10% 90%;
+
+    --card: 240 12% 7%;
+    --card-foreground: 40 10% 90%;
+
+    --popover: 240 12% 7%;
+    --popover-foreground: 40 10% 90%;
+
+    --primary: 42 78% 48%;
+    --primary-foreground: 240 20% 4%;
+
+    --secondary: 240 8% 12%;
+    --secondary-foreground: 40 10% 75%;
+
+    --muted: 240 8% 14%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 42 78% 48%;
+    --accent-foreground: 240 20% 4%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 8% 12%;
+    --input: 240 8% 14%;
+    --ring: 42 78% 48%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gold: 42 78% 48%;
+    --gold-muted: 42 60% 38%;
+    --surface: 240 10% 6%;
+    --surface-hover: 240 8% 9%;
+    --text-primary: 0 0% 100%;
+    --text-secondary: 220 10% 55%;
+    --text-tertiary: 220 10% 30%;
+    --glow-gold: 0 0 80px hsla(42, 78%, 48%, 0.15);
+
+    --sidebar-background: 240 12% 7%;
+    --sidebar-foreground: 40 10% 90%;
+    --sidebar-primary: 42 78% 48%;
+    --sidebar-primary-foreground: 240 20% 4%;
+    --sidebar-accent: 240 8% 14%;
+    --sidebar-accent-foreground: 40 10% 90%;
+    --sidebar-border: 240 8% 12%;
+    --sidebar-ring: 42 78% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'DM Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-primary/20 bg-card/80;
+    transform: translateY(-2px);
+  }
+
+  .section-heading {
+    @apply font-display text-4xl tracking-wider;
+  }
+
+  .meta-label {
+    @apply text-[0.6rem] font-semibold tracking-[0.15em] uppercase text-muted-foreground;
+  }
+
+  .meta-value {
+    @apply text-sm font-semibold text-secondary-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 40px hsla(42, 78%, 48%, 0.1); }
+    50% { box-shadow: 0 0 80px hsla(42, 78%, 48%, 0.2); }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-float {
+    animation: float 4.5s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+}
+
+/* Globe container */
+#globe-container canvas {
+  outline: none;
+}
