@@ -1,8 +1,10 @@
+// FILE: src/pages/Index.tsx  (drop-in replacement)
 import { useState, useEffect, useCallback } from "react";
 import GlobeBackground from "@/components/GlobeBackground";
 import Navbar from "@/components/Navbar";
 import CitySearch from "@/components/CitySearch";
 import HeroSection from "@/components/HeroSection";
+import AISearchBar from "@/components/AISearchBar";
 import HourlyForecast from "@/components/HourlyForecast";
 import WeeklyForecast from "@/components/WeeklyForecast";
 import AqiSection from "@/components/AqiSection";
@@ -12,8 +14,8 @@ import Footer from "@/components/Footer";
 import { WeatherData, geocodeCity, fetchWeatherData } from "@/lib/weather";
 
 const Index = () => {
-  const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [cityName, setCityName] = useState("Mumbai, India");
+  const [weather, setWeather]     = useState<WeatherData | null>(null);
+  const [cityName, setCityName]   = useState("Mumbai, India");
   const [isLoading, setIsLoading] = useState(false);
 
   const loadWeather = useCallback(async (lat: number, lon: number, name: string) => {
@@ -24,17 +26,12 @@ const Index = () => {
     setIsLoading(false);
   }, []);
 
-  const handleCitySelect = useCallback(
-    async (city: string) => {
-      setIsLoading(true);
-      const geo = await geocodeCity(city);
-      if (geo) {
-        await loadWeather(geo.lat, geo.lon, geo.name);
-      }
-      setIsLoading(false);
-    },
-    [loadWeather]
-  );
+  const handleCitySelect = useCallback(async (city: string) => {
+    setIsLoading(true);
+    const geo = await geocodeCity(city);
+    if (geo) await loadWeather(geo.lat, geo.lon, geo.name);
+    setIsLoading(false);
+  }, [loadWeather]);
 
   useEffect(() => {
     loadWeather(19.076, 72.8777, "Mumbai, India");
@@ -56,6 +53,7 @@ const Index = () => {
         {weather && (
           <>
             <HeroSection weather={weather} cityName={cityName} />
+            <AISearchBar weather={weather} cityName={cityName} />
             <HourlyForecast weather={weather} />
             <WeeklyForecast weather={weather} />
             <AqiSection weather={weather} />
