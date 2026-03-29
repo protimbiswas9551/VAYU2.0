@@ -1,5 +1,4 @@
-// FILE: src/pages/Index.tsx  (drop-in replacement)
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import GlobeBackground from "@/components/GlobeBackground";
 import Navbar from "@/components/Navbar";
 import CitySearch from "@/components/CitySearch";
@@ -9,6 +8,7 @@ import HourlyForecast from "@/components/HourlyForecast";
 import WeeklyForecast from "@/components/WeeklyForecast";
 import AqiSection from "@/components/AqiSection";
 import WindChart from "@/components/WindChart";
+import CompareCities from "@/components/CompareCities";
 import WeatherAlerts from "@/components/WeatherAlerts";
 import Footer from "@/components/Footer";
 import { WeatherData, geocodeCity, fetchWeatherData } from "@/lib/weather";
@@ -58,6 +58,7 @@ const Index = () => {
             <WeeklyForecast weather={weather} />
             <AqiSection weather={weather} />
             <WindChart weather={weather} />
+            <CompareCities />
             <WeatherAlerts weather={weather} />
             <Footer />
           </>
