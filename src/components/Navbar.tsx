@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { href: "#weekly", label: "7-Day" },
   { href: "#aqi", label: "AQI" },
   { href: "#wind", label: "Wind" },
+  { href: "#compare", label: "Compare" },
   { href: "#alerts", label: "Alerts" },
 ];
 
@@ -40,7 +41,11 @@ const Navbar = () => {
           <a
             key={link.href}
             href={link.href}
-            className="text-muted-foreground hover:text-foreground text-xs font-medium tracking-wider uppercase px-3 py-1.5 rounded-full hover:bg-secondary transition-colors"
+            className={`text-muted-foreground hover:text-foreground text-xs font-medium tracking-wider uppercase px-3 py-1.5 rounded-full hover:bg-secondary transition-colors ${
+              link.href === "#compare"
+                ? "text-primary/70 hover:text-primary hover:bg-primary/10"
+                : ""
+            }`}
           >
             {link.label}
           </a>
